@@ -6,3 +6,6 @@ brew bundle --global
 
 stow kitty
 stow nvim
+
+# TODO: Check if karabiner can be installed from here
+stow karabiner
