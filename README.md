@@ -7,3 +7,15 @@ You wanna know how to exit vim? Just click the red button in the corner of the t
 So why this repo exists? Because every linux pro user has such repo and I wanna be considered pro too
 
 _Just kidding, nothing here yet because I'm too lazy to configure everything nicely_
+
+## Installation
+
+```
+git clone https://github.com/barthap/.kropkapliki.git ~/.dotfiles
+cd ~/.dotfiles
+./install.sh
+```
+
+## How it works
+
+Check out this guy: https://www.youtube.com/@jakewies
