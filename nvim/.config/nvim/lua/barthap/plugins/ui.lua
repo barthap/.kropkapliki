@@ -67,7 +67,22 @@ return {
       dashboard.section.footer.opts.hl = "AlphaFooter"
       -- this padding only for header
       -- dashboard.opts.layout[1].val = 8
+      --
+      -- replace header with terminal
       dashboard.opts.layout[2] = dashboard.section.terminal
+
+      -- extend layout with fortune text
+      local get_fortune = require("alpha.fortune")
+      local fortune = table.concat(get_fortune(), "\n")
+      table.insert(dashboard.opts.layout, { type = "padding", val = 2 })
+      table.insert(dashboard.opts.layout, {
+        type = "text",
+        val = "💡 Motvational quote of the day:\n" .. fortune,
+        opts = {
+          position = "center",
+          hl = "character",
+        },
+      })
 			return dashboard
 		end,
 		config = function(_, dashboard)
