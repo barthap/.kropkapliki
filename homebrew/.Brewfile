@@ -14,6 +14,7 @@ brew 'figlet'       # Output text as big ASCII art text
 brew 'lolcat'       # Make console output raibow colored
 brew 'ripgrep'      # Better grep
 brew 'ranger'       # Directory browser
+brew 'gnu-sed'      # gsed (needed for spectre nvim)
 
 brew 'exa'          # Better ls
 brew 'fd'           # Better find
