@@ -23,3 +23,10 @@ brew 'zoxide'       # Better cd (the z command)
 
 brew 'tmux'
 
+# Nerd font
+tap 'homebrew/cask-fonts'
+# Version 3.0 broke fonts, use 2.3.3
+cask 'https://raw.githubusercontent.com/Homebrew/homebrew-cask-fonts/c6f6dbdf5da109fdcc01d86703bd7d64329f143d/Casks/font-symbols-only-nerd-font.rb'
+# cask 'font-meslo-lg-nerd-font'
+# cask 'font-symbols-only-nerd-font'
+
