@@ -4,6 +4,7 @@
 stow homebrew
 brew bundle --global
 
+stow assorted
 stow kitty
 stow nvim
 
