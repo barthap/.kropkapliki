@@ -5,14 +5,20 @@ return {
 		lazy = true,
 		opts = { style = "moon" },
 	},
+  { "catppuccin/nvim", name = "catppuccin" },
+  { "tanvirtin/monokai.nvim",
+    lazy = false,
+    opts = { italics = false },
+  },
 
 	-- dashboard
-	{
-		"goolord/alpha-nvim",
-		event = "VimEnter",
-		opts = function()
-			local dashboard = require("alpha.themes.dashboard")
-			local logo = [[
+  {
+    "goolord/alpha-nvim",
+    version = "*",
+    event = "VimEnter",
+    opts = function()
+      local dashboard = require("alpha.themes.dashboard")
+      local logo = [[
              _                        
              \`*-.                    
               )  _`-.                 
@@ -34,6 +40,7 @@ return {
       local image_path = static_path .. "kitku.txt"
       local terminal = {
         type = "terminal",
+        -- command = "cat | " .. static_path .. "animated_lolcat.sh " .. image_path,
         command = "cat | lolcat -a -F 0.3 -s 150 " .. image_path,
         width = 38,
         height = 15,
@@ -83,34 +90,34 @@ return {
           hl = "character",
         },
       })
-			return dashboard
-		end,
-		config = function(_, dashboard)
-			-- close Lazy and re-open when the dashboard is ready
-			if vim.o.filetype == "lazy" then
-				vim.cmd.close()
-				vim.api.nvim_create_autocmd("User", {
-					pattern = "AlphaReady",
-					callback = function()
-						require("lazy").show()
-					end,
-				})
-			end
+      return dashboard
+    end,
+    config = function(_, dashboard)
+      -- close Lazy and re-open when the dashboard is ready
+      if vim.o.filetype == "lazy" then
+        vim.cmd.close()
+        vim.api.nvim_create_autocmd("User", {
+          pattern = "AlphaReady",
+          callback = function()
+            require("lazy").show()
+          end,
+        })
+      end
 
       require("alpha.term")
-			require("alpha").setup(dashboard.opts)
+      require("alpha").setup(dashboard.opts)
 
-			vim.api.nvim_create_autocmd("User", {
-				pattern = "LazyVimStarted",
-				callback = function()
-					local stats = require("lazy").stats()
-					local ms = (math.floor(stats.startuptime * 100 + 0.5) / 100)
-					dashboard.section.footer.val = "⚡ Neovim loaded " .. stats.count .. " plugins in " .. ms .. "ms"
-					pcall(vim.cmd.AlphaRedraw)
-				end,
-			})
-		end,
-	},
+      vim.api.nvim_create_autocmd("User", {
+        pattern = "LazyVimStarted",
+        callback = function()
+          local stats = require("lazy").stats()
+          local ms = (math.floor(stats.startuptime * 100 + 0.5) / 100)
+          dashboard.section.footer.val = "⚡ Neovim loaded " .. stats.count .. " plugins in " .. ms .. "ms"
+          pcall(vim.cmd.AlphaRedraw)
+        end,
+      })
+    end,
+  },
 
 	-- ui components
 	{ "MunifTanjim/nui.nvim", lazy = true },

@@ -92,6 +92,22 @@ return {
 			},
 		},
 	},
+  {
+    'simrat39/symbols-outline.nvim',
+    cmd = "SymbolsOutline",
+    keys = {
+      { "<leader>fs", "<cmd>SymbolsOutline<cr>", desc = "Show file symbols" },
+    },
+    opts = {
+      auto_close = true,
+      autofold_depth = 2,
+      auto_unfold_hover = true,
+      symbol_blacklist = { 'Variable' },
+    },
+    config = function (_, opts)
+     require("symbols-outline").setup(opts)
+    end,
+  },
 
 	-- maximize current split / window
 	{
@@ -161,8 +177,14 @@ return {
 				options = {
 					theme = "auto",
 					globalstatus = true,
-					disabled_filetypes = { statusline = { "dashboard", "alpha" } },
+					disabled_filetypes = { statusline = { "dashboard", "alpha" }, winbar = { "dashboard", "alpha", "neo-tree" } },
 				},
+        winbar = {
+          lualine_c = { { "filetype", icon_only = true, separator = '', }, "filename" },
+        },
+        inactive_winbar = {
+          lualine_c = { { "filetype", icon_only = true, separator = '', }, "filename" },
+        },
 				sections = {
 					lualine_a = { "mode" },
 					lualine_b = { "branch" },
@@ -418,6 +440,22 @@ return {
       { "<leader>xt", "<cmd>TodoTrouble<cr>", desc = "Todo (Trouble)" },
       { "<leader>xT", "<cmd>TodoTrouble keywords=TODO,FIX,FIXME<cr>", desc = "Todo/Fix/Fixme (Trouble)" },
       { "<leader>st", "<cmd>TodoTelescope<cr>", desc = "Todo" },
+    },
+    opts = {
+      search = {
+        args = {
+          "--color=never",
+          "--no-heading",
+          "--with-filename",
+          "--line-number",
+          "--column",
+          "--hidden",
+          "--glob",
+          "!.git/*",
+          "--glob",
+          "!.cargo/*",
+        },
+      },
     },
 	},
 }

@@ -43,21 +43,20 @@ function M.get()
         end,
         desc = "Source Action",
         has = "codeAction",
-      }
+      },
+      -- inlay hints
+      { "<leader>uh", require("lsp-inlayhints").toggle, desc = "Toggle inlay hints" },
     }
 		if require("barthap.utils").has("inc-rename.nvim") then
-			M._keys[#M._keys + 1] = {
-				"<leader>cr",
-				function()
-					require("inc_rename")
-					return ":IncRename " .. vim.fn.expand("<cword>")
-				end,
-				expr = true,
-				desc = "Rename",
-				has = "rename",
-			}
+      local rename_func = function()
+        require("inc_rename")
+        return ":IncRename " .. vim.fn.expand("<cword>")
+      end
+      M._keys[#M._keys + 1] = { "<leader>cr", rename_func, expr = true, desc = "Rename", has = "rename" }
+      M._keys[#M._keys + 1] = { "<S-F6>", rename_func, expr = true, desc = "Rename", has = "rename" }
 		else
 			M._keys[#M._keys + 1] = { "<leader>cr", vim.lsp.buf.rename, desc = "Rename", has = "rename" }
+			M._keys[#M._keys + 1] = { "<S-F6>", vim.lsp.buf.rename, desc = "Rename", has = "rename" }
 		end
 	end
 	return M._keys

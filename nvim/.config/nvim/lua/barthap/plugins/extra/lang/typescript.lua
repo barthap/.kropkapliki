@@ -32,6 +32,14 @@ return {
 				tsserver = function(_, opts)
 					require("barthap.utils").on_attach(function(client, buffer)
 						if client.name == "tsserver" then
+              local content = vim.api.nvim_buf_get_lines(buffer, 0, 3, false);
+              for _, line in ipairs(content) do
+                if string.find(line, '@flow') then
+                  -- print('Flow detected. Disabling TS server')
+                  client.stop()
+                  return
+                end
+              end
               -- stylua: ignore
               vim.keymap.set("n", "<leader>co", "<cmd>TypescriptOrganizeImports<CR>", { buffer = buffer, desc = "Organize Imports" })
               -- stylua: ignore

@@ -1,1 +1,4 @@
 .DS_Store
+
+# Sensitive environment variables (use .env.zsh.example as template)
+zsh/.env.zsh

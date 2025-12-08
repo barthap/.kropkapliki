@@ -1,6 +1,6 @@
 # Barthap's dotfiles
 
-Nothing to do here. Nothing to see here. Wanna know why? I'll never understand people using artifacts of the past like command line, terminals, bash, vim and all that stuff. It's 2023 - GUI exists for decades now and there's no need to manually type stuff and remember all that commands. Now, besides keyboard, you have another powerful tool available - a MOUSE!
+Nothing to do here. Nothing to see here. Wanna know why? I'll never understand people using artifacts of the past like command line, terminals, bash, vim and all that stuff. It's 2026 - GUI exists for decades now and there's no need to manually type stuff and remember all that commands. Now, besides keyboard, you have another powerful tool available - a MOUSE!
 
 You wanna know how to exit vim? Just click the red button in the corner of the terminal window. It closes vim along with the whole terminal. You don't need it.
 
@@ -13,9 +13,9 @@ _Just kidding, nothing here yet because I'm too lazy to configure everything nic
 ```
 git clone https://github.com/barthap/.kropkapliki.git ~/.dotfiles
 cd ~/.dotfiles
-./install.sh
+./install-mac.sh
 ```
 
-## How it works
+## Next steps
 
-Check out this guy: https://www.youtube.com/@jakewies
+Check out [zsh setup README](/zsh/README.md) for more serious instructions.

@@ -5,13 +5,19 @@ local function telescope(builtin, opts)
 		opts = params.opts
 		opts = vim.tbl_deep_extend("force", { cwd = require("barthap.utils").get_root() }, opts or {})
 		if builtin == "files" then
+      -- TODO: check if this solution isn't better:
+      -- https://github.com/nvim-telescope/telescope.nvim/wiki/Configuration-Recipes#falling-back-to-find_files-if-git_files-cant-find-a-git-directory
 			if vim.loop.fs_stat((opts.cwd or vim.loop.cwd()) .. "/.git") then
 				opts.show_untracked = true
 				builtin = "git_files"
+        print("git_files")
 			else
 				builtin = "find_files"
+        print("find_files")
 			end
 		end
+    print("cwd " .. (opts.cwd or "nil"))
+    -- opts.cwd = opts.cwd or vim.loop.cwd()
 		require("telescope.builtin")[builtin](opts)
 	end
 end
@@ -146,6 +152,24 @@ return {
 					},
 				},
 			},
+      pickers = {
+        buffers = {
+          sort_lastused = true,
+        },
+        grep_string = {
+          additional_args = function(_)
+            -- search in hidden files
+            -- TODO: mybe apply this to other pickers as well
+            return {"--hidden", "--glob", "!.git/*", "--glob", "!.cargo/*"}
+          end
+        },
+        live_grep = {
+          additional_args = function(_)
+            -- search in hidden files
+            return {"--hidden", "--glob", "!.git/*", "--glob", "!.cargo/*"}
+          end
+        },
+      },
 		},
 	},
 }

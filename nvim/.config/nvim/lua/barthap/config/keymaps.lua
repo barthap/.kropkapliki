@@ -20,11 +20,33 @@ map({ "i", "v", "n", "s" }, "<C-s>", "<cmd>w<cr><esc>", { desc = "Save file" })
 map("n", "j", "v:count == 0 ? 'gj' : 'j'", { expr = true, silent = true })
 map("n", "k", "v:count == 0 ? 'gk' : 'k'", { expr = true, silent = true })
 
+local function edgeDetect(direction)
+    local currWin = vim.api.nvim_get_current_win()
+    vim.api.nvim_command("wincmd " .. direction)
+    local newWin = vim.api.nvim_get_current_win()
+
+    -- You're at the edge when you just moved direction and the window number is the same
+    return currWin == newWin
+end
+
+local function move(direction)
+  if vim.fn.getenv("ZELLIJ") ~= vim.n then
+    if direction == "top" then direction = "up" end
+    if direction == "bottom" then direction = "down" end
+    vim.fn.system("zellij action move-focus " .. direction)
+  else
+    vim.fn.system("kitty @ kitten neighboring_window.py " .. direction)
+  end
+end
 -- Move to window using the <ctrl> hjkl keys
-map("n", "<C-h>", "<C-w>h", { desc = "Go to left window" })
-map("n", "<C-j>", "<C-w>j", { desc = "Go to lower window" })
-map("n", "<C-k>", "<C-w>k", { desc = "Go to upper window" })
-map("n", "<C-l>", "<C-w>l", { desc = "Go to right window" })
+-- map("n", "<C-h>", "<C-w>h", { desc = "Go to left window" })
+-- map("n", "<C-j>", "<C-w>j", { desc = "Go to lower window" })
+-- map("n", "<C-k>", "<C-w>k", { desc = "Go to upper window" })
+-- map("n", "<C-l>", "<C-w>l", { desc = "Go to right window" })
+map("n", "<C-h>", function() if edgeDetect('h') then move("left") end end, { desc = "Go to left window" })
+map("n", "<C-j>", function() if edgeDetect('j') then move("bottom") end end, { desc = "Go to lower window" })
+map("n", "<C-k>", function() if edgeDetect('k') then move("top") end end, { desc = "Go to upper window" })
+map("n", "<C-l>", function() if edgeDetect('l') then move("right") end end, { desc = "Go to right window" })
 
 -- windows/panes/splits
 map("n", "<leader>ww", "<C-W>p", { desc = "Other window" })

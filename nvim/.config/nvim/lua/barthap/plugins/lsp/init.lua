@@ -8,6 +8,7 @@ return {
 			{ "folke/neodev.nvim", opts = { experimental = { pathStrict = true } } },
 			"mason.nvim",
 			"williamboman/mason-lspconfig.nvim",
+      "lvimuser/lsp-inlayhints.nvim",
 			{
 				"hrsh7th/cmp-nvim-lsp",
 				cond = function()
@@ -72,6 +73,7 @@ return {
 			require("barthap.plugins.lsp.format").autoformat = opts.autoformat
 			-- setup formatting and keymaps
 			require("barthap.utils").on_attach(function(client, buffer)
+        require("lsp-inlayhints").on_attach(client, buffer, false)
 				require("barthap.plugins.lsp.format").on_attach(client, buffer)
 				require("barthap.plugins.lsp.keymaps").on_attach(client, buffer)
 			end)
@@ -128,6 +130,8 @@ return {
 				mlsp.setup({ ensure_installed = ensure_installed })
 				mlsp.setup_handlers({ setup })
 			end
+
+      require("lsp-inlayhints").setup()
 		end,
 	},
 

@@ -23,7 +23,7 @@ require("lazy").setup({
 		{ import = "barthap.plugins.extra.linting.eslint" },
 		{ import = "barthap.plugins.extra.formatting.prettier" },
 		-- other overrides
-		{ import = "barthap.plugins.extra.coding.copilot" },
+		-- { import = "barthap.plugins.extra.coding.copilot" },
 		---- Other general plugins
 		{ "ThePrimeagen/vim-be-good" },
 	},
