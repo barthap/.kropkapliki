@@ -1,4 +1,4 @@
-# Barthap's NeoVim config
+# 💤 LazyVim
 
-This is mostly copied from [LazyVim](https://www.lazyvim.org/) but it contains many subtle modifications to better suit my needs.
-I know that LazyVim is configurable and extensible, but some mods would require deep interference anyway.
+A starter template for [LazyVim](https://github.com/LazyVim/LazyVim).
+Refer to the [documentation](https://lazyvim.github.io/installation) to get started.
