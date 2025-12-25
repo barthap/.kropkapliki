@@ -74,3 +74,7 @@ brew 'cocoapods'
 # SSL/TLS that I don't understand but stuff often doesn't work without it
 brew 'ca-certificates'
 
+# AI slop
+brew 'claude-code'
+brew 'gemini-cli'
+
